@@ -95,21 +95,27 @@
                         </aside>
                     </section>
                     <section>
-                        <h2>Windows Systems</h2>
+                        <h2>Windows</h2>
+                        <p>Windows is currently a second class citizen!</p>
                         <ul>
-                            <li> Download the <a href="http://static.rust-lang.org/dist/rust-nightly-install.exe">Installer</a></li>
-                            <li> "Run" it</li>
-                            <li> If it gives you a security warning, select "More Info" &gt; "Run Anyway"</li>
-                            <li>Keep hitting next with the default options</li>
+                            <li> Download <a href="https://www.virtualbox.org/wiki/Downloads">Virtualbox</a></li>
+                            <li> Download <a href="http://www.vagrantup.com/downloads.html">Vagrant</a></li>
+                            <li>Run the installers with default options</li>
+                            <li>Wait a year and half</li>
+                            <li>Restart</li>
+                            <li>Start the Command Prompt (search for cmd.exe)</li>
+                            <li>Type "vagrant init"</li>
+                            <li>then "vagrant up"</li>
+                            <li>Finally type:</li>
+                            <pre><code>curl -s http://www.rust-lang.org/rustup.sh | sudo sh</code></pre>
                         </ul>
                     </section>
                     <section>
                         <p>This should get you:</p>
                         <ul>
                             <li>rustc - the Rust compiler</li>
-                            <li>cargo* - the Rust package manager</li>
+                            <li>cargo - the Rust package manager</li>
                         </ul>
-                        <p>*cargo only supports unix environments</p>
                     </section>
                 </section>
                 <section>
@@ -133,17 +139,7 @@ fn main() {
                         <h2>Compile it</h2>
                     </section>
                     <section>
-                        <h2>On *nix:</h2>
                         <p>Open up a terminal and run:</p>
-                        <pre><code>rustc "path/to/hello_world.rs"</code></pre>
-                    </section>
-                    <section>
-                        <h2>On Windows:</h2>
-                        <ul>
-                            <li>Search for "cmd.exe"</li>
-                            <li>open "cmd.exe"</li>
-                            <li>on the command line, type:</li>
-                        </ul>
                         <pre><code>rustc "path/to/hello_world.rs"</code></pre>
                     </section>
                     <section>
@@ -153,6 +149,32 @@ fn main() {
                             <li>could not load shared library...</li>
                             <li>command rustc not found</li>
                         </ul>
+                    </section>
+                    <section>
+                        <h2>Make it a package</h2>
+                        <ul>
+                            <li>move hello_world.rs to src/hello_world.rs</li>
+                            <li>Create a file Cargo.toml in the same directory as hello_world.rs</li>
+                            <li>Add the configuration:</li>
+                        </ul>
+                        <pre><code>
+                        [package]
+
+                        name = "hello_world"
+                        version = "0.1.0"
+                        authors = [ "someone@example.com" ]
+
+                        [[bin]]
+
+                        name = "hello_world"
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Use cargo</h2>
+                        <p>Run this in the current directory:</p>
+                        <pre><code>
+                        cargo build
+                        </code></pre>
                     </section>
 
                 </section>
@@ -178,6 +200,9 @@ fn fib(i: int) -> int {
 let john: Person;
 
                     </code></pre>
+                    <aside class="notes">
+                        function argument and return types must be explicit
+                    </aside>
                     </section>
                     <section>
                         <h2>Type inference</h2>
@@ -190,6 +215,9 @@ fn main() {
     let x = fib(10);
 }
                         </code></pre>
+                        <aside class="notes">
+                            function argument and return types must be explicit
+                        </aside>
                     </section>
                     <section>
                         <h2>Conditions</h2>
@@ -235,8 +263,189 @@ fn factorial(i: int) -> int {
 } 
                         </code></pre>
                     </section>
-                
-                
+                    <section>
+                        <h2>Tuples</h2>
+                        <pre><code data-trim contenteditable>
+let point = (1i, 2i, 3i);
+let (x, y, z) = point;
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Stuctures</h2>
+                        <pre><code data-trim contenteditable>
+struct Point {
+    x: int,
+    y: int,
+    z: int
+}
+
+let point = Point{x: 1, y: 2, z: 3};
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Tuple Stuctures</h2>
+                        <pre><code data-trim contenteditable>
+struct Point(int, int, int);
+
+let point = Point(1, 2, 3);
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Enums</h2>
+                        <pre><code data-trim contenteditable>
+enum PointResult {
+    Ok(Point),
+    Error(PointError)
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Matching</h2>
+                        <pre><code data-trim contenteditable>
+match derive_point((1,2,3)) {
+    Ok(point) => println!("success"),
+    Error(error) => fail!(error)
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Matching as an expression</h2>
+                        <pre><code data-trim contenteditable>
+let point = match derive_point((1,2,3)) {
+    Ok(point) => point,
+    Error(error) => fail!(error)
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Matching with Ranges</h2>
+                        <pre><code data-trim contenteditable>
+let case = match character {
+    'a'..'z' => Little,
+    'A'..'Z' => Big
+};
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Conditional Matching</h2>
+                        <pre><code data-trim contenteditable>
+fn factorial(i: uint) -> uint {
+    match i {
+        0u | 1u => 1,
+        _ => i * factorial(i - 1)
+    }
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Looping</h2>
+                        <pre><code data-trim contenteditable>
+for element in vector.iter() {
+    ...
+}
+
+loop {
+    ...
+}
+
+while !done {
+    ...
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>References</h2>
+                        <pre><code data-trim contenteditable>
+fn distance(a: &Point, b: &Point) -> f64 {
+    let xd: f64 = (a.x - b.x) as f64;
+    let yd: f64 = (a.y - b.y) as f64;
+    let zd: f64 = (a.z - b.z) as f64;
+    ((xd * xd) + (yd * yd) + (zd * zd)).sqrt()                    
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Lending/Borrowing</h2>
+                        <pre><code data-trim contenteditable>
+let a = Point{x: 1, y: 2, x: 3};
+let b = box Point{x: 1, y: 2, x: 3};
+println!("distance {}", distance(&a, &*b))
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Slices</h2>
+                        <pre><code data-trim contenteditable>
+let digits: &[uint] = [3u, 1u, 4u, 1u, 5u, 9u];
+let alphabet: &[char] = ['a', 'b', 'c'];
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Vec vs slices</h2>
+                        <pre><code data-trim contenteditable>
+use std::vec::Vec;
+
+let digits: &[uint] = [3u, 1u, 4u, 1u, 5u, 9u];
+let moar: Vec<uint> = Vec::from_slice(digits);
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>str vs String</h2>
+                        <pre><code data-trim contenteditable>
+use std::string::String;
+
+let msg: &str = "Hello World";
+let message: String = String::from_str(msg);
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>methods (OOP)</h2>
+                        <pre><code data-trim contenteditable>
+impl Point {
+    fn new(x: int, y: int, z: int) {
+        Point{x, y, z}
+    }
+    fn distance(&self, other: Point) -> f64 {
+        let xd: f64 = (self.x - other.x) as f64;
+        let yd: f64 = (self.y - other.y) as f64;
+        let zd: f64 = (self.z - other.z) as f64;
+        ((xd * xd) + (yd * yd) + (zd * zd)).sqrt()                    
+    }
+} 
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Generics</h2>
+                        <pre><code data-trim contenteditable>
+struct Queue<T> {
+    elements: Vec<T>;
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Traits</h2>
+                        <pre><code data-trim contenteditable>
+trait Sortable<T> {
+    fn compare(&self, other: &T) -> int;
+}
+
+impl Sortable<uint> for uint {
+    fn compare(self: &uint, other: &uint) -> int {
+        ...
+    }
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Lifetimes</h2>
+                        <pre><code data-trim contenteditable>
+impl Point {
+    fn get_x<'a>(&self) -> &'a int {
+        &self.x
+    }
+}
+
+                        </code></pre>
+                    </section>
                 </section>
 			
                 
