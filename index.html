@@ -44,63 +44,97 @@
 			<div class="slides">
 				<section>
 					<h1>Welcome to Rust</h1>
-					<h3>HTML Presentations Made Easy</h3>
-					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
-					</p>
+					<h3>A whirlwind introduction</h3>
 				</section>
-
 				<section>
-					<h2>Heads Up</h2>
-					<p>
-						reveal.js is a framework for easily creating beautiful presentations using HTML. You'll need a browser with
-						support for CSS 3D transforms to see it in its full glory.
-					</p>
+                    <section>
+                        <h1>What is Rust?</h1>
+                    </section>
+                    <section>
+					    <p>A systems programming language pursuing the trifecta</p>
+                        <ul>
+                            <li>Safe</li>
+                            <li>Concurrent</li>
+                            <li>Fast</li>
+                        </ul>
+                        <aside class="notes">
+                                It's a functional programming language (impure) that will feel
+                                familiar to C/C++ developers.
 
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
+                                It's like if C++ and Haskell had a baby that grew up to date Ruby and Python
+                        
+                                It's called Rust, by the way, because none of the ideas in it are new.
+                        </aside>
+                    </section>
 				</section>
-
-				<!-- Example of nested vertical slides -->
 				<section>
-					<section>
-						<h2>Vertical Slides</h2>
-						<p>
-							Slides can be nested inside of other slides,
-							try pressing <a href="#" class="navigate-down">down</a>.
-						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 1</h2>
-						<p>Press down or up to navigate.</p>
-					</section>
-					<section>
-						<h2>Basement Level 2</h2>
-						<p>Cornify</p>
-						<a class="test" href="http://cornify.com">
-							<img width="280" height="326" src="https://s3.amazonaws.com/hakim-static/reveal-js/cornify.gif" alt="Unicorn">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 3</h2>
-						<p>That's it, time to go back up.</p>
-						<a href="#/2" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
-					</section>
+                    <h1>What is Rust for?</h1>
+                    <aside class="notes">
+                        Large scale, low level systems:
+                        browsers, servers, operating system components, databases, games, basically anything you might write in c++.
+                        note that is is what rust was built _for_ not what it _can do_
+                        it's turing complete so... do what ever you want. But that
+                        doesn't necessarily mean it's appropriate for everything.
+                    </aside>
 				</section>
-
 				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? No problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slid.es" target="_blank">http://slid.es</a>.
-					</p>
-				</section>
+                    <section>
+                        <h1>Let's look at code</h1>
+                    </section>
+                    <section>
+                        <h2>Hello World</h2>
+                        <pre><code data-trim contenteditable>
+fn main() {
+    println!("Hello World");
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Type inference</h2>
+                        <pre><code data-trim contenteditable>
+fn fib(i: int) -> int {
+    ...
+}
 
+fn main() {
+    let x = fib(10);
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Conditions</h2>
+                        <pre><code data-trim contenteditable>
+fn main() {
+    let x = 8i;
+    if x == 7 {
+        println!("{} == 7", x);
+    } else if x < 7 {
+        println!("{} < 7", x);
+    } else {
+        println!("{} > 7", x);                       
+    }
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Returning</h2>
+                        <pre><code data-trim contenteditable>
+fn factorial(i: int) -> { 
+    if i <= 1 { 
+        1 
+    } else { 
+        i * fib(i - 1) 
+    }
+} 
+                        </code></pre>
+                    </section>
+                
+                
+                </section>
+                <section>
+                    <h2>Compiling Rust</h2>
+                    <pre><code>rustc <source></code></pre>
+                </section>
 				<section>
 					<h2>Point of View</h2>
 					<p>
@@ -258,22 +292,6 @@ Reveal.addEventListener( 'customevent', function() {
 
 				<section>
 					<h2>Pretty Code</h2>
-					<pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
-}
-					</code></pre>
 					<p>Courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
 				</section>
 
@@ -375,7 +393,7 @@ function linkify( selector ) {
 
 
                 multiplex: {
-                    secret: null,
+                    secret: "14067505480329742957",
                     id: "b08c7e7c14c01753",
                     url: "http://revealjs.jit.su:80/"
                 },
@@ -384,7 +402,7 @@ function linkify( selector ) {
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
 			        { src: '//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.10/socket.io.min.js', async: true },
-                    { src: 'plugin/multiplex/client.js', async: true },
+                    { src: 'plugin/multiplex/master.js', async: true },
                     { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
 					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
