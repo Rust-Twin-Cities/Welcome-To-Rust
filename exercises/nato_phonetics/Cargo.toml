@@ -1,0 +1,5 @@
+[package]
+
+name = "nato_phonetics"
+version = "0.1.0"
+authors = [ "someone@example.com" ]
