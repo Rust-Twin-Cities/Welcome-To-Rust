@@ -81,6 +81,83 @@
 				</section>
 				<section>
                     <section>
+                        <h1>Installation</h1>
+                        <aside class="notes">
+                            Initially I was going to make this a Vagrant based install, but I watched <a href="http://youtu.be/9u16I0QEBOk">this keynote</a> where they talked about windows being second-class citizens in python and how this was detrimental to the ecosystem. So let's try to make Windows first class citizens in Rust.
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>Unix-y Systems</h2>
+                        <p>Run this in a terminal</p>
+                        <pre><code>curl -s http://www.rust-lang.org/rustup.sh | sudo sh</code></pre>
+                        <aside class="notes">
+                            You may need to substite in zsh or whatever shell you are using.
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>Windows Systems</h2>
+                        <ul>
+                            <li> Download the <a href="http://static.rust-lang.org/dist/rust-nightly-install.exe">Installer</a></li>
+                            <li> "Run" it</li>
+                            <li> If it gives you a security warning, select "More Info" &gt; "Run Anyway"</li>
+                            <li>Keep hitting next with the default options</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <p>This should get you:</p>
+                        <ul>
+                            <li>rustc - the Rust compiler</li>
+                            <li>cargo* - the Rust package manager</li>
+                        </ul>
+                        <p>*cargo only supports unix environments</p>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h1>Let's test it out</h1>
+                    </section>
+                    <section>
+                        <p>Open up your favorite text editor</p>
+                    </section>
+                    <section>
+                        <p>Type out:</p> 
+                        <pre><code>
+fn main() {
+    println!("Hello World");
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p>Save it as "hello_world.rs" somewhere memorable</p>                    </section>
+                    <section>
+                        <h2>Compile it</h2>
+                    </section>
+                    <section>
+                        <h2>On *nix:</h2>
+                        <p>Open up a terminal and run:</p>
+                        <pre><code>rustc "path/to/hello_world.rs"</code></pre>
+                    </section>
+                    <section>
+                        <h2>On Windows:</h2>
+                        <ul>
+                            <li>Search for "cmd.exe"</li>
+                            <li>open "cmd.exe"</li>
+                            <li>on the command line, type:</li>
+                        </ul>
+                        <pre><code>rustc "path/to/hello_world.rs"</code></pre>
+                    </section>
+                    <section>
+                        <h2>Who got errors?</h2>
+                        <p>Errors I've encountered</p>
+                        <ul>    
+                            <li>could not load shared library...</li>
+                            <li>command rustc not found</li>
+                        </ul>
+                    </section>
+
+                </section>
+                <section>
+                    <section>
                         <h1>Let's look at code</h1>
                     </section>
                     <section>
@@ -92,8 +169,19 @@ fn main() {
                         </code></pre>
                     </section>
                     <section>
+                        <h2>Types</h2>
+                        <pre><code data-trim>
+fn fib(i: int) -> int {
+    ...
+}
+
+let john: Person;
+
+                    </code></pre>
+                    </section>
+                    <section>
                         <h2>Type inference</h2>
-                        <pre><code data-trim contenteditable>
+                        <pre><code data-trim>
 fn fib(i: int) -> int {
     ...
 }
@@ -105,7 +193,7 @@ fn main() {
                     </section>
                     <section>
                         <h2>Conditions</h2>
-                        <pre><code data-trim contenteditable>
+                        <pre><code data-trim>
 fn main() {
     let x = 8i;
     if x == 7 {
@@ -119,9 +207,9 @@ fn main() {
                         </code></pre>
                     </section>
                     <section>
-                        <h2>Returning</h2>
+                        <h2>Implicitly Returning</h2>
                         <pre><code data-trim contenteditable>
-fn factorial(i: int) -> { 
+fn factorial(i: int) -> int { 
     if i <= 1 { 
         1 
     } else { 
@@ -130,14 +218,29 @@ fn factorial(i: int) -> {
 } 
                         </code></pre>
                     </section>
+                    <section>
+                        <h2>Explicitly Returning</h2>
+                        <pre><code data-trim contenteditable>
+fn factorial(i: int) -> int { 
+    let mut counter = i;
+    let mut sum = 1;
+    loop {
+        if counter <= 1 {
+            return sum;
+        }
+        
+        sum *= counter;
+        counter -= 1;
+    }
+} 
+                        </code></pre>
+                    </section>
                 
                 
                 </section>
-                <section>
-                    <h2>Compiling Rust</h2>
-                    <pre><code>rustc <source></code></pre>
-                </section>
-			</div>
+			
+                
+            </div>
 
 		</div>
 
